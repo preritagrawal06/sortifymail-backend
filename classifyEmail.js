@@ -2,13 +2,13 @@ const { ChatGoogleGenerativeAI } = require("@langchain/google-genai");
 const { HumanMessage } = require("@langchain/core/messages");
 
 const classifyEmail = async (req, res, next) => {
-  const { emails } = await req.body;
+  const { emails, apikey } = await req.body;
 
   const model = new ChatGoogleGenerativeAI({
     model: "gemini-1.5-pro",
     maxOutputTokens: 2048,
     temperature: 0,
-    apiKey: process.env.GOOGLE_API_KEY,
+    apiKey: apikey,
   });
 
   const snippets = emails.map((email) => {
